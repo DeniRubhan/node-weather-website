@@ -11,7 +11,7 @@ const forecast = (latitude, longitude, callback) =>{
         } else if(body.message) {
             callback('Unable to find the location. Try another search'+body.type , undefined)
         } else {
-            callback(undefined , body.data.timelines[0].intervals[0].values.temperature+' it is currently '+body.data.timelines[0].intervals[0].values.temperature+' visibility =  '+body.data.timelines[0].intervals[0].values.visibility+' humidity = '+body.data.timelines[0].intervals[0].values.humidity+' windSpeed = '+body.data.timelines[0].intervals[0].values.windSpeed)
+            callback(undefined ,'It is currently '+body.data.timelines[0].intervals[0].values.temperature+' Celsius, visibility =  '+body.data.timelines[0].intervals[0].values.visibility+', humidity = '+body.data.timelines[0].intervals[0].values.humidity+', windSpeed = '+body.data.timelines[0].intervals[0].values.windSpeed)
         }
 
     })
