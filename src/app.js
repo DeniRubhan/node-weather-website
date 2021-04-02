@@ -5,6 +5,7 @@ const { response } = require('express')
 const app = express()
 const getgeocode = require('./utils/geocode')
 const forecast = require('./utils/forecast')
+const forecastFull = require('./utils/forcastFull')
 
 const port = process.env.PORT || 3000
 
@@ -57,6 +58,37 @@ app.get('/weather',(req, res)=>{
         } 
         
         forecast(latitude, longitude, (error, forecastData) => {
+            if(error){
+                return res.send({
+                    error:error
+                })
+            }
+            
+            res.send({
+                address:req.query.address,
+                location:location,
+                forecastData:forecastData
+            })
+            //app.put('/weatherFull',location)
+          })
+    })
+})
+
+app.get('/weatherFull' ,(req,res) =>{
+    if(!req.query.address){
+        return res.send({
+            error:'Need to provide the address'
+        })
+    }
+
+    getgeocode(req.query.address , (error , {latitude , longitude, location} = {}) =>{
+        if(error){
+            return res.send({
+                error:error
+            })
+        } 
+        
+        forecastFull(latitude, longitude, (error, forecastData) => {
             if(error){
                 return res.send({
                     error:error
