@@ -22,7 +22,7 @@ weatherForm.addEventListener('submit' , (e) =>{
             message1.textContent = data.location + '. '
             message2.textContent = data.forecastData
             moreDetails.addEventListener('click' , (e) =>{
-                window.location = 'http://localhost:3000/weatherFull?address='+location
+                window.location = '/weatherFull?address='+location
             })
         }
     })
